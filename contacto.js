@@ -1,4 +1,4 @@
-const express = require('express');
+/*const express = require('express');
 const bodyParser = require('body-parser');
 const nodemailer = require('nodemailer');
 
@@ -38,3 +38,4 @@ app.use(bodyParser.json());
 app.listen(3000, () => {
     console.log('Servidor iniciado en el puerto 3000');
 });
+*/

@@ -1,13 +1,13 @@
 
 module.exports = function(app, databaseService) {
-
     app.get('/', (request, response)=>{ //get Leer datos
         response.json({"mensaje":"bien"})
     } );
     
     app.get('/Registro', (request, response) =>{ // Leer datos con Post
-        const bodyRequest = request.body;
-        databaseService.leerRegistro(bodyRequest.mail)
+        const query = request.query;
+        console.log(query)
+        databaseService.leerRegistro(query.mail, query.contrasena)
         .then(registros =>{
             response.json(registros);
         }).catch(e => response.status(500).json(e));
@@ -48,10 +48,8 @@ module.exports = function(app, databaseService) {
             nuevoMascota.fechaNacimiento,
             nuevoMascota.raza    
         )
-        
         .then(()=>{
             response.json({"mensaje": "Mascota creada!"});
-
         }).catch(e => {
             response.status(500).json(e);
         })

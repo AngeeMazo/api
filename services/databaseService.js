@@ -7,7 +7,7 @@ const databaseService = () => {
             port : 3306,
             user : 'angee2',
             password: 'lorena99.',
-            database : 'veterinaria',
+            database : 'veterinaria'
          }
     });
       
@@ -24,13 +24,13 @@ const databaseService = () => {
         return knex(tableAgendar).select();
     };
 
-    const leerRegistro = (mail) => {
-        return knex(tableRegistro).select().where('mail', mail);
+    const leerRegistro = (mail, contrasena) => {
+        return knex(tableRegistro).select().where('mail', mail).where('contrasena', contrasena);
     };
 
-    const crearRegistro = (idRegistro, mail, idMascota, nombre, apellido, contrasena, telefono ) => {
+    const crearRegistro = (idRegistro, mail, idMascota, nombre, apellido, contrasena, telefono) => {
         return knex(tableRegistro).insert({
-            id_Registro : idRegistro,
+            id_Registro: idRegistro,
             mail: mail,
             id_mascota: idMascota, 
             nombre: nombre,
@@ -48,11 +48,8 @@ const databaseService = () => {
             nombre: nombre, 
             tipo_Mascota: tipoMascota,
             fecha_Nacimiento: fechaNacimiento, 
-            raza : raza
-            
+            raza: raza
         });
-
-        
     };
 
    const crearAgendar = (idAgendar,nombreServicio, idMascota, fecha ) => {
@@ -60,7 +57,7 @@ const databaseService = () => {
             id_Agendar_Hora : idAgendar,
             nombre_Servicio: nombreServicio, 
             id_Mascota: idMascota,
-            fecha : fecha
+            fecha: fecha
             
         });
      };
