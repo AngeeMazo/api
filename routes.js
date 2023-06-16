@@ -20,13 +20,16 @@ module.exports = function(app, databaseService) {
 
         databaseService.crearRegistro(
             nuevoRegistro.idRegistro,
-            nuevoRegistro.mail,
-            nuevoRegistro.idMascota,
+            nuevoRegistro.email,
             nuevoRegistro.nombre,
             nuevoRegistro.apellido,
             nuevoRegistro.contrasena,
-            nuevoRegistro.telefono
-        )
+            nuevoRegistro.telefono,
+            nuevoRegistro.nombre_mascota,
+            nuevoRegistro.tipo_mascota,
+            nuevoRegistro.fecha_nacimiento,
+            nuevoRegistro.raza
+            )
         
         .then(()=>{
             response.json({"mensaje": "Registro creado!"});
@@ -36,20 +39,23 @@ module.exports = function(app, databaseService) {
         })
     });
 
-    app.post('/Mascota', (request, response) =>{ // crear datos con Post
-        const nuevoMascota = request.body;
-        console.log(nuevoMascota);
 
-        databaseService.crearMascota(
-            nuevoMascota.idMascota,
-            nuevoMascota.mail,
-            nuevoMascota.nombre,
-            nuevoMascota.tipoMascota,
-            nuevoMascota.fechaNacimiento,
-            nuevoMascota.raza    
-        )
+    app.post('/Agendar', (request, response) =>{ // crear datos con Post
+        const nuevoAgenda = request.body;
+        console.log(nuevoAgenda);
+
+        databaseService.crearAgendar(
+            nuevoAgenda.idAgendar,
+            nuevoAgenda.nombre_Servicio,
+            nuevoAgenda.id_Registro,
+            nuevoAgenda.fecha,
+            nuevoAgenda.hora
+            
+            )
+        
         .then(()=>{
-            response.json({"mensaje": "Mascota creada!"});
+            response.json({"mensaje": "Hora creada!"});
+
         }).catch(e => {
             response.status(500).json(e);
         })
@@ -59,6 +65,7 @@ app.post('/enviar-correo', (req, res) => {
     const nombre = req.body.nombre;
     const email = req.body.email;
     const mensaje = req.body.mensaje;
+    console.log(req.body);
 
     // Configurar el transporte del correo electrónico
     const transporter = nodemailer.createTransport({
