@@ -47,10 +47,10 @@ module.exports = function(app, databaseService) {
         databaseService.crearAgendar(
             nuevoAgenda.idAgendar,
             nuevoAgenda.nombre_Servicio,
+            nuevoAgenda.especialista,
             nuevoAgenda.id_Registro,
             nuevoAgenda.fecha,
-            nuevoAgenda.hora
-            
+            nuevoAgenda.hora  
             )
         
         .then(()=>{
@@ -60,6 +60,7 @@ module.exports = function(app, databaseService) {
             response.status(500).json(e);
         })
     });
+
 
 app.post('/enviar-correo', (req, res) => {
     const nombre = req.body.nombre;

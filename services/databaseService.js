@@ -37,20 +37,18 @@ const databaseService = () => {
             tipo_mascota: tipoMascota,
             fecha_nacimiento: fechaNacimiento,
             raza: raza,
-            administrador : 0
-            
+            administrador : 0     
         });
-    };
-
+    }
   
-
-   const crearAgendar = (idAgenda, nombreServicio, idRegistro, fecha, hora ) => {
+   const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda ) => {
         return knex(tableAgendar).insert({
             id_Agendar: idAgenda,
             nombre_Servicio: nombreServicio,
+            especialista: nombreEspecialista,
             id_Registro: idRegistro,
-            fecha: fecha,
-            hora: hora
+            fecha: fechaAgenda,
+            hora: horaAgenda
             
         });
      };
