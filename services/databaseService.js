@@ -13,8 +13,7 @@ const databaseService = () => {
       
     const tableRegistro = 'Registro';
     const tableAgendar = 'Agendar';
-    
-
+    const tableContacto = 'form_Contacto';
 
     const getAgendar = () => {
         return knex(tableAgendar).select();
@@ -23,6 +22,10 @@ const databaseService = () => {
     const leerRegistro = (mail, contrasena) => {
         return knex(tableRegistro).select().where('mail', mail).where('contrasena', contrasena);
     };
+
+    /*const getContacto =() => {
+        return knex(tableContacto).select();
+    };*/
 
     const crearRegistro = (idRegistro, email, nombre, apellido, contrasena, telefono, nombreMascota, tipoMascota, fechaNacimiento, raza) => {
         console.log(email);
@@ -40,7 +43,7 @@ const databaseService = () => {
             administrador : 0     
         });
     }
-  
+
    const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda ) => {
         return knex(tableAgendar).insert({
             id_Agendar: idAgenda,
@@ -52,6 +55,15 @@ const databaseService = () => {
             
         });
      };
+     
+/* const enviarMensaje= (nombre, mail, mensaje) => {
+    return knex(tableContacto).insert({
+        nombre: nombre,
+        mail: mail,
+        mensaje: mensaje
+        
+    });
+ };  */
 
     return {crearRegistro, crearAgendar, getAgendar, leerRegistro };
     

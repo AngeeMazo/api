@@ -61,39 +61,22 @@ module.exports = function(app, databaseService) {
         })
     });
 
+    /*app.post('/form_Contacto', (request, response) =>{ // crear datos con Post
+        const nuevoEnviarMensaje= request.body;
+        console.log(nuevoEnviarMensaje);
 
-app.post('/enviar-correo', (req, res) => {
-    const nombre = req.body.nombre;
-    const email = req.body.email;
-    const mensaje = req.body.mensaje;
-    console.log(req.body);
+        databaseService.crearAgendar(
+            nuevoEnviarMensaje.nombre,
+            nuevoEnviarMensaje.mail,
+            nuevoEnviarMensaje.mensaje 
+            )
+        
+        .then(()=>{
+            response.json({"mensaje": "Enviado!"});
 
-    // Configurar el transporte del correo electrónico
-    const transporter = nodemailer.createTransport({
-        service: 'Gmail',
-        auth: {
-            user: 'angeelorena99@gmail.com',
-            pass: 'Lorena99.'
-        }
-    });
+        }).catch(e => {
+            response.status(500).json(e);
+        })
+   });*/
 
-    // Configurar el contenido del correo electrónico
-    const mailOptions = {
-        from: email,
-        to: 'angeelorena99@gmail.com',
-        subject: 'Nuevo formulario de contacto',
-        text: `Nombre: ${nombre}\nEmail: ${email}\nMensaje: ${mensaje}`
-    };
-
-    // Enviar el correo electrónico
-    transporter.sendMail(mailOptions, function(error, info) {
-        if (error) {
-            console.log(error);
-            res.sendStatus(500);
-        } else {
-            console.log('Correo electrónico enviado: ' + info.response);
-            res.sendStatus(200);
-        }
-    });
-});
 };
