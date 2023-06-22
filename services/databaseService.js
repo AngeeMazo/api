@@ -69,7 +69,6 @@ const databaseService = () => {
     
 };
 
-
 module.exports = {
     databaseService
 };
