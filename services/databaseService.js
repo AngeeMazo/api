@@ -13,25 +13,26 @@ const databaseService = () => {
       
     const tableRegistro = 'Registro';
     const tableAgendar = 'Agendar';
-    const tableContacto = 'form_Contacto';
+  
 
     const getAgendar = () => {
         return knex(tableAgendar).select();
     };
 
-    const leerRegistro = (mail, contrasena) => {
-        return knex(tableRegistro).select().where('mail', mail).where('contrasena', contrasena);
+    const leerRegistro = (email, contrasena) => {
+        return knex(tableRegistro).select().where('email', email).where('contrasena', contrasena);
     };
 
-    /*const getContacto =() => {
-        return knex(tableContacto).select();
-    };*/
+    const leerAgendaUsuario = (idRegistro) => {
+        return knex(tableAgendar).select().where('id_Registro', idRegistro);
+    };
+    
 
     const crearRegistro = (idRegistro, email, nombre, apellido, contrasena, telefono, nombreMascota, tipoMascota, fechaNacimiento, raza) => {
         console.log(email);
         return knex(tableRegistro).insert({
             id_Registro: idRegistro,
-            mail: email,
+            email: email,
             nombre: nombre,
             apellido: apellido, 
             contrasena: contrasena,
@@ -44,28 +45,20 @@ const databaseService = () => {
         });
     }
 
-   const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda ) => {
+   const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda, id_Servicio) => {
         return knex(tableAgendar).insert({
             id_Agendar: idAgenda,
             nombre_Servicio: nombreServicio,
             especialista: nombreEspecialista,
             id_Registro: idRegistro,
             fecha: fechaAgenda,
-            hora: horaAgenda
+            hora: horaAgenda,
+            id_Servicio : id_Servicio
             
         });
      };
-     
-/* const enviarMensaje= (nombre, mail, mensaje) => {
-    return knex(tableContacto).insert({
-        nombre: nombre,
-        mail: mail,
-        mensaje: mensaje
-        
-    });
- };  */
 
-    return {crearRegistro, crearAgendar, getAgendar, leerRegistro };
+    return {crearRegistro, crearAgendar, getAgendar, leerRegistro, leerAgendaUsuario};
     
 };
 

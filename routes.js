@@ -7,9 +7,19 @@ module.exports = function(app, databaseService) {
     app.get('/Registro', (request, response) =>{ // Leer datos con Post
         const query = request.query;
         console.log(query)
-        databaseService.leerRegistro(query.mail, query.contrasena)
+        databaseService.leerRegistro(query.email, query.contrasena)
         .then(registros =>{
             response.json(registros);
+        }).catch(e => response.status(500).json(e));
+          
+    });
+
+    app.get('/ConsultaAgeda', (request, response) =>{ // Leer datos con Post
+        const query = request.query;
+        console.log(query)
+        databaseService.leerAgendaUsuario(query.idRegistro)
+        .then(agenda=>{
+            response.json(agenda);
         }).catch(e => response.status(500).json(e));
           
     });
@@ -30,7 +40,6 @@ module.exports = function(app, databaseService) {
             nuevoRegistro.fecha_nacimiento,
             nuevoRegistro.raza
             )
-        
         .then(()=>{
             response.json({"mensaje": "Registro creado!"});
 
@@ -38,7 +47,6 @@ module.exports = function(app, databaseService) {
             response.status(500).json(e);
         })
     });
-
 
     app.post('/Agendar', (request, response) =>{ // crear datos con Post
         const nuevoAgenda = request.body;
@@ -50,9 +58,9 @@ module.exports = function(app, databaseService) {
             nuevoAgenda.especialista,
             nuevoAgenda.id_Registro,
             nuevoAgenda.fecha,
-            nuevoAgenda.hora  
-            )
-        
+            nuevoAgenda.hora,
+            nuevoAgenda.id_Servicio
+        )
         .then(()=>{
             response.json({"mensaje": "Hora creada!"});
 
@@ -60,23 +68,5 @@ module.exports = function(app, databaseService) {
             response.status(500).json(e);
         })
     });
-
-    /*app.post('/form_Contacto', (request, response) =>{ // crear datos con Post
-        const nuevoEnviarMensaje= request.body;
-        console.log(nuevoEnviarMensaje);
-
-        databaseService.crearAgendar(
-            nuevoEnviarMensaje.nombre,
-            nuevoEnviarMensaje.mail,
-            nuevoEnviarMensaje.mensaje 
-            )
-        
-        .then(()=>{
-            response.json({"mensaje": "Enviado!"});
-
-        }).catch(e => {
-            response.status(500).json(e);
-        })
-   });*/
 
 };
