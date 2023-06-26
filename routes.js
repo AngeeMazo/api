@@ -14,6 +14,29 @@ module.exports = function(app, databaseService) {
           
     });
 
+     
+    app.get('/Registros', (request, response) =>{ // Leer datos con Post
+        const query = request.query;
+        console.log(query)
+        databaseService.getRegistros()
+        .then(registros =>{
+            response.json(registros);
+        }).catch(e => response.status(500).json(e));
+          
+    });
+
+         
+    app.get('/Agendas', (request, response) =>{ // Leer datos con Post
+        const query = request.query;
+        console.log(query)
+        databaseService.getAgendas()
+        .then(agendas =>{
+            response.json(agendas);
+        }).catch(e => response.status(500).json(e));
+          
+    });
+
+
     app.get('/ConsultaAgeda', (request, response) =>{ // Leer datos con Post
         const query = request.query;
         console.log(query)
@@ -59,7 +82,8 @@ module.exports = function(app, databaseService) {
             nuevoAgenda.id_Registro,
             nuevoAgenda.fecha,
             nuevoAgenda.hora,
-            nuevoAgenda.id_Servicio
+            nuevoAgenda.id_Servicio,
+            nuevoAgenda.id_Especialista
         )
         .then(()=>{
             response.json({"mensaje": "Hora creada!"});

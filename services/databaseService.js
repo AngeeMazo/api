@@ -15,8 +15,12 @@ const databaseService = () => {
     const tableAgendar = 'Agendar';
   
 
-    const getAgendar = () => {
+    const getAgendas = () => {
         return knex(tableAgendar).select();
+    };
+
+    const getRegistros = () => {
+        return knex(tableRegistro).select();
     };
 
     const leerRegistro = (email, contrasena) => {
@@ -45,7 +49,7 @@ const databaseService = () => {
         });
     }
 
-   const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda, id_Servicio) => {
+   const crearAgendar = (idAgenda, nombreServicio, nombreEspecialista, idRegistro, fechaAgenda, horaAgenda, id_Servicio, id_Especialista) => {
         return knex(tableAgendar).insert({
             id_Agendar: idAgenda,
             nombre_Servicio: nombreServicio,
@@ -53,12 +57,13 @@ const databaseService = () => {
             id_Registro: idRegistro,
             fecha: fechaAgenda,
             hora: horaAgenda,
-            id_Servicio : id_Servicio
+            id_Servicio : id_Servicio,
+            id_Especialista : id_Especialista
             
         });
      };
 
-    return {crearRegistro, crearAgendar, getAgendar, leerRegistro, leerAgendaUsuario};
+    return {crearRegistro, crearAgendar, getAgendas, getRegistros, leerRegistro, leerAgendaUsuario};
     
 };
 
