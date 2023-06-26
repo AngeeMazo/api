@@ -27,6 +27,10 @@ const databaseService = () => {
         return knex(tableRegistro).select().where('email', email).where('contrasena', contrasena);
     };
 
+    const eliminarRegistro = (idRegistro) => {
+        return knex(tableRegistro).delete().where('id_Registro', idRegistro);
+    };
+
     const leerAgendaUsuario = (idRegistro) => {
         return knex(tableAgendar).select().where('id_Registro', idRegistro);
     };
@@ -63,7 +67,10 @@ const databaseService = () => {
         });
      };
 
-    return {crearRegistro, crearAgendar, getAgendas, getRegistros, leerRegistro, leerAgendaUsuario};
+
+
+
+    return {crearRegistro, crearAgendar, getAgendas, getRegistros, eliminarRegistro, leerRegistro, leerAgendaUsuario};
     
 };
 

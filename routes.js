@@ -14,7 +14,17 @@ module.exports = function(app, databaseService) {
           
     });
 
-     
+        
+    app.delete('/deleteRegistro', (request, response) =>{ // Leer datos con Post
+        const query = request.query;
+        console.log(query)
+        databaseService.eliminarRegistro(query.idRegistro)
+        .then(response =>{
+            response.json(response);
+        }).catch(e => response.status(500).json(e));
+          
+    });
+
     app.get('/Registros', (request, response) =>{ // Leer datos con Post
         const query = request.query;
         console.log(query)
@@ -70,6 +80,8 @@ module.exports = function(app, databaseService) {
             response.status(500).json(e);
         })
     });
+
+ 
 
     app.post('/Agendar', (request, response) =>{ // crear datos con Post
         const nuevoAgenda = request.body;
